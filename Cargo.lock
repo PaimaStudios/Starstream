@@ -1958,7 +1958,7 @@ checksum = "685a9ac4b61f4e728e1d2c6a7844609c16527aeb5e6c865915c08e619c16410f"
 [[package]]
 name = "neo"
 version = "0.1.0"
-source = "git+https://github.com/nicarq/halo3?rev=2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc#2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc"
+source = "git+https://github.com/nicarq/halo3?rev=0a89023320b862da2e9bf2aec1197410e1df5b47#0a89023320b862da2e9bf2aec1197410e1df5b47"
 dependencies = [
  "anyhow",
  "bincode",
@@ -1983,7 +1983,7 @@ dependencies = [
 [[package]]
 name = "neo-ajtai"
 version = "0.1.0"
-source = "git+https://github.com/nicarq/halo3?rev=2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc#2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc"
+source = "git+https://github.com/nicarq/halo3?rev=0a89023320b862da2e9bf2aec1197410e1df5b47#0a89023320b862da2e9bf2aec1197410e1df5b47"
 dependencies = [
  "neo-ccs",
  "neo-math",
@@ -2003,9 +2003,10 @@ dependencies = [
 [[package]]
 name = "neo-ccs"
 version = "0.1.0"
-source = "git+https://github.com/nicarq/halo3?rev=2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc#2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc"
+source = "git+https://github.com/nicarq/halo3?rev=0a89023320b862da2e9bf2aec1197410e1df5b47#0a89023320b862da2e9bf2aec1197410e1df5b47"
 dependencies = [
  "neo-math",
+ "neo-params",
  "once_cell",
  "p3-field",
  "p3-goldilocks",
@@ -2023,7 +2024,7 @@ dependencies = [
 [[package]]
 name = "neo-challenge"
 version = "0.1.0"
-source = "git+https://github.com/nicarq/halo3?rev=2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc#2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc"
+source = "git+https://github.com/nicarq/halo3?rev=0a89023320b862da2e9bf2aec1197410e1df5b47#0a89023320b862da2e9bf2aec1197410e1df5b47"
 dependencies = [
  "neo-math",
  "neo-transcript",
@@ -2038,7 +2039,7 @@ dependencies = [
 [[package]]
 name = "neo-fold"
 version = "0.1.0"
-source = "git+https://github.com/nicarq/halo3?rev=2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc#2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc"
+source = "git+https://github.com/nicarq/halo3?rev=0a89023320b862da2e9bf2aec1197410e1df5b47#0a89023320b862da2e9bf2aec1197410e1df5b47"
 dependencies = [
  "bincode",
  "blake3",
@@ -2064,7 +2065,7 @@ dependencies = [
 [[package]]
 name = "neo-math"
 version = "0.1.0"
-source = "git+https://github.com/nicarq/halo3?rev=2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc#2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc"
+source = "git+https://github.com/nicarq/halo3?rev=0a89023320b862da2e9bf2aec1197410e1df5b47#0a89023320b862da2e9bf2aec1197410e1df5b47"
 dependencies = [
  "p3-field",
  "p3-goldilocks",
@@ -2079,7 +2080,7 @@ dependencies = [
 [[package]]
 name = "neo-params"
 version = "0.1.0"
-source = "git+https://github.com/nicarq/halo3?rev=2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc#2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc"
+source = "git+https://github.com/nicarq/halo3?rev=0a89023320b862da2e9bf2aec1197410e1df5b47#0a89023320b862da2e9bf2aec1197410e1df5b47"
 dependencies = [
  "serde",
  "thiserror 2.0.17",
@@ -2088,7 +2089,7 @@ dependencies = [
 [[package]]
 name = "neo-spartan-bridge"
 version = "0.1.0"
-source = "git+https://github.com/nicarq/halo3?rev=2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc#2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc"
+source = "git+https://github.com/nicarq/halo3?rev=0a89023320b862da2e9bf2aec1197410e1df5b47#0a89023320b862da2e9bf2aec1197410e1df5b47"
 dependencies = [
  "anyhow",
  "bellpepper-core",
@@ -2120,7 +2121,7 @@ dependencies = [
 [[package]]
 name = "neo-transcript"
 version = "0.1.0"
-source = "git+https://github.com/nicarq/halo3?rev=2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc#2cdbb7cb1ca6c6fa343985a908e1c1db2d6885dc"
+source = "git+https://github.com/nicarq/halo3?rev=0a89023320b862da2e9bf2aec1197410e1df5b47#0a89023320b862da2e9bf2aec1197410e1df5b47"
 dependencies = [
  "neo-ccs",
  "neo-math",
@@ -3194,8 +3195,6 @@ dependencies = [
  "p3-field",
  "p3-goldilocks",
  "p3-symmetric",
- "serde",
- "serde_json",
  "tracing",
  "tracing-subscriber",
 ]
