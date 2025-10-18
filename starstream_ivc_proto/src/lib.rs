@@ -156,17 +156,17 @@ impl Transaction<Vec<Instruction>> {
         let (chain, step_ios) = session.finalize();
 
         // TODO: this fails right now, but the circuit should be sat
-        // let ok = ::neo::verify_chain_with_descriptor(
-        //     &descriptor,
-        //     &chain,
-        //     &y0,
-        //     &params,
-        //     &step_ios,
-        //     ::neo::AppInputBinding::WitnessBound,
-        // )
-        // .unwrap();
+        let ok = ::neo::verify_chain_with_descriptor(
+            &descriptor,
+            &chain,
+            &y0,
+            &params,
+            &step_ios,
+            ::neo::AppInputBinding::WitnessBound,
+        )
+        .unwrap();
 
-        // assert!(ok, "neo chain verification failed");
+        assert!(ok, "neo chain verification failed");
 
         let (final_proof, _final_ccs, _final_public_input) = finalize_ivc_chain_with_options(
             &descriptor,
@@ -321,5 +321,76 @@ mod tests {
         let proof = tx.prove().unwrap();
 
         proof.verify(changes);
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_starstream_tx_invalid_witness() {
+        init_test_logging();
+
+        let utxo_id1: UtxoId = UtxoId::from(110);
+        let utxo_id2: UtxoId = UtxoId::from(300);
+        let utxo_id3: UtxoId = UtxoId::from(400);
+
+        let changes = vec![
+            (
+                utxo_id1,
+                UtxoChange {
+                    output_before: F::from(5),
+                    output_after: F::from(5),
+                    consumed: false,
+                },
+            ),
+            (
+                utxo_id2,
+                UtxoChange {
+                    output_before: F::from(4),
+                    output_after: F::from(0),
+                    consumed: true,
+                },
+            ),
+            (
+                utxo_id3,
+                UtxoChange {
+                    output_before: F::from(5),
+                    output_after: F::from(43),
+                    consumed: false,
+                },
+            ),
+        ]
+        .into_iter()
+        .collect::<BTreeMap<_, _>>();
+
+        let tx = Transaction::new_unproven(
+            changes.clone(),
+            vec![
+                Instruction::Nop {},
+                Instruction::Resume {
+                    utxo_id: utxo_id2,
+                    input: F::from(0),
+                    output: F::from(0),
+                },
+                Instruction::DropUtxo { utxo_id: utxo_id2 },
+                Instruction::Resume {
+                    utxo_id: utxo_id3,
+                    input: F::from(42),
+                    // Invalid: output should be F::from(43) to match output_after,
+                    // but we're providing a mismatched value
+                    output: F::from(999),
+                },
+                Instruction::YieldResume {
+                    utxo_id: utxo_id3,
+                    output: F::from(42),
+                },
+                Instruction::Yield {
+                    utxo_id: utxo_id3,
+                    // Invalid: input should match Resume output but doesn't
+                    input: F::from(999),
+                },
+            ],
+        );
+
+        // This should fail during proving because the witness is invalid
+        tx.prove().unwrap();
     }
 }
